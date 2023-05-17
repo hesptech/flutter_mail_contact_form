@@ -1,9 +1,10 @@
-import 'dart:convert';
+//import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:email_validator/email_validator.dart';
-import 'package:http/http.dart' as http;
+//import 'package:email_validator/email_validator.dart';
+//import 'package:http/http.dart' as http;
 //import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_mail_contact_form/card_details_mail_form.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,22 +23,67 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
 
 class MyHomePage extends StatelessWidget {
-  MyHomePage({Key? key}) : super(key: key);
+  const MyHomePage({Key? key}) : super(key: key);
 
-  final _formKey = GlobalKey<FormState>();
+  /* final _formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final emailController = TextEditingController();
-  final messageController = TextEditingController();
+  final messageController = TextEditingController(); */
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
+      body: SingleChildScrollView(
+        child: Center(
+          child: ElevatedButton(
+            child: const Text('Modal Bottom Sheet Up'),
+            onPressed: () {
+              showModalBottomSheet(
+                isScrollControlled: true,
+                context: context, 
+                builder: (BuildContext context) {
+
+                  return Column(
+                    children: const [
+                      SizedBox(height: 40.0,),
+                      CardDetailsMailForm(),
+                    ]
+                  );
+
+
+                  //return const CardDetailsMailForm();
+      
+      
+                  /* return SizedBox(
+                    //height: 200,
+                    child: Center(
+                      child: ElevatedButton(
+                        child: const Text('Close'),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        }, 
+                      ),
+                    ),
+                  ); */
+                }
+              );
+            }, 
+          ),
+        ),
+      ),
+    );
+    
+    
+    //return CardDetailsMailForm();
+
+    /* return Scaffold(
       backgroundColor: const Color(0xfff5f5fd),
       body: Center(
         child: Container(
@@ -149,11 +195,11 @@ class MyHomePage extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ); */
   }
 }
 
-Future sendEmail(String name, String email, String message) async {
+/* Future sendEmail(String name, String email, String message) async {
   final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
   final response = await http.post(url,
       headers: {
@@ -171,4 +217,4 @@ Future sendEmail(String name, String email, String message) async {
         }
       }));
   return response.body;
-}
+} */
